@@ -16,7 +16,7 @@
               </li>
               <li class="menu-title" key="t-apps">Proses</li>
 
-              <li :class="$route.name === 'Data' ? 'mm-active' : ''">
+              <li :class="$route.name ==='Data' ? 'mm-active' : ''">
                 <RouterLink to="/data" class="waves-effect">
                   <i class="bx bx-git-branch"></i>
                   <span key="t-data">Input Data</span>

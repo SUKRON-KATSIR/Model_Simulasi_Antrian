@@ -1,5 +1,5 @@
 <template>
-    <header id="page-topbar" class="bg-warning">
+    <header id="page-topbar" class="bg-info">
         <div class="navbar-header">
             <div class="d-flex">
                 <!-- LOGO -->
