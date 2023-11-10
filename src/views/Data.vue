@@ -124,7 +124,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-6">
+                                                                <div class="col-7">
                                                                     <input type="text" name="waktu_diam" id="waktu_diam"
                                                                         class="form-control text-center"
                                                                         v-model="waktuDiam[i][item]" disabled>
