@@ -10,7 +10,7 @@
 
               <li :class="$route.name === 'Home' ? 'mm-active' : ''">
                 <RouterLink to="/">
-                  <i class="bx bx-home-circle"></i>
+                  <i class="bx bx-home"></i>
                   <span key="t-dashboards">Dashboard</span>
                 </RouterLink>
               </li>
@@ -18,7 +18,8 @@
 
               <li :class="$route.name ==='Data' ? 'mm-active' : ''">
                 <RouterLink to="/data" class="waves-effect">
-                  <i class="bx bx-git-branch"></i>
+                  <i class="  bx bx-data"></i>
+                  <!-- <i class="bx bx-git-branch"></i> -->
                   <span key="t-data">Input Data</span>
                 </RouterLink>
               </li>

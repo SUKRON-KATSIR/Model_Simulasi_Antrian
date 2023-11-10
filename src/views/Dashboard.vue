@@ -27,7 +27,7 @@
               </div>
               <div class="col-lg-3 col-sm-4 align-self-center">
                 <div>
-                  <img src="/images/crypto/features-img/img-1.png" alt="" class="img-fluid d-block">
+                  <img src="/images/crypto/features-img/img-2.png" alt="" class="img-fluid d-block">
                 </div>
               </div>
             </div>
