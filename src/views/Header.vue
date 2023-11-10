@@ -6,19 +6,19 @@
                 <div class="navbar-brand-box">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="/images/logo.svg" alt="" height="22" />
+                            <img src="/images/logo.png" alt="" height="30" />
                         </span>
                         <span class="logo-lg">
-                            <img src="/images/logo-dark.png" alt="" height="17" />
+                            <img src="/images/logop.png" alt="" height="40" />
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="/images/logo-light.svg" alt="" height="22" />
+                            <img src="/images/logo.png" alt="" height="30" />
                         </span>
                         <span class="logo-lg">
-                            <img src="/images/logo-light.png" alt="" height="19" />
+                            <img src="/images/logop.png" alt="" height="40" />
                         </span>
                     </a>
                 </div>
