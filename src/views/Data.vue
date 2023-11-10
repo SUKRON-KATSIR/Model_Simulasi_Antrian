@@ -73,7 +73,7 @@
                                                         <td>{{ index }}</td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-10">
+                                                                <div class="col-6">
                                                                     <input type="text" name="waktu_kedatangan"
                                                                         id="waktu_kedatangan"
                                                                         class="form-control text-center"
@@ -84,7 +84,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-10">
+                                                                <div class="col-6">
                                                                     <input type="text" name="waktu_pelayanan"
                                                                         id="waktu_pelayanan"
                                                                         class="form-control text-center"
@@ -95,7 +95,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-10">
+                                                                <div class="col-6">
                                                                     <input type="text" name="waktu_selasaipelayanan"
                                                                         id="waktu_selasaipelayanan"
                                                                         class="form-control text-center"
@@ -106,7 +106,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-10">
+                                                                <div class="col-6">
                                                                     <input type="text" name="waktu_lama" id="waktu_lama"
                                                                         class="form-control text-center"
                                                                         v-model="waktuLama[i][item]" disabled>
@@ -115,7 +115,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-10">
+                                                                <div class="col-6">
                                                                     <input type="text" name="waktu_meunggu"
                                                                         id="waktu_meunggu" class="form-control text-center"
                                                                         v-model="waktuMenunggu[i][item]" disabled>
@@ -124,7 +124,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-10">
+                                                                <div class="col-7">
                                                                     <input type="text" name="waktu_diam" id="waktu_diam"
                                                                         class="form-control text-center"
                                                                         v-model="waktuDiam[i][item]" disabled>
