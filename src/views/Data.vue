@@ -47,8 +47,8 @@
                                                 <input type="text" class="form-control" v-model="countSPelanggan[i]">
                                             </div>
                                             <div class="col-auto"><button class="btn btn-success"
-                                                    @click="tambahPelanggan(i)"><i
-                                                        class="bx bx-send"></i>Tambah</button></div>
+                                                    @click="tambahPelanggan(i)"><i class="bx bx-send"></i>Tambah</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                                         <th>Waktu Kedatangan</th>
                                                         <th>Mulai Pelayanan</th>
                                                         <th>Selesai Pelayanan</th>
-                                                        <th>Lama Pelanggan</th>
+                                                        <th>Lama Pelayanan</th>
                                                         <th>Pelanggan Menunggu</th>
                                                         <th>Petugas Diam</th>
                                                     </tr>
@@ -73,7 +73,7 @@
                                                         <td>{{ index }}</td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-6">
+                                                                <div class="col-5">
                                                                     <input type="text" name="waktu_kedatangan"
                                                                         id="waktu_kedatangan"
                                                                         class="form-control text-center"
@@ -84,7 +84,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-6">
+                                                                <div class="col-5">
                                                                     <input type="text" name="waktu_pelayanan"
                                                                         id="waktu_pelayanan"
                                                                         class="form-control text-center"
@@ -95,7 +95,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-6">
+                                                                <div class="col-5">
                                                                     <input type="text" name="waktu_selasaipelayanan"
                                                                         id="waktu_selasaipelayanan"
                                                                         class="form-control text-center"
@@ -106,7 +106,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-6">
+                                                                <div class="col-5">
                                                                     <input type="text" name="waktu_lama" id="waktu_lama"
                                                                         class="form-control text-center"
                                                                         v-model="waktuLama[i][item]" disabled>
@@ -115,7 +115,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-6">
+                                                                <div class="col-5">
                                                                     <input type="text" name="waktu_meunggu"
                                                                         id="waktu_meunggu" class="form-control text-center"
                                                                         v-model="waktuMenunggu[i][item]" disabled>
@@ -124,7 +124,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="row justify-content-center">
-                                                                <div class="col-7">
+                                                                <div class="col-5">
                                                                     <input type="text" name="waktu_diam" id="waktu_diam"
                                                                         class="form-control text-center"
                                                                         v-model="waktuDiam[i][item]" disabled>
@@ -149,9 +149,9 @@
             </div>
         </div>
         <div class="alert alert-info mt-5">
-            Waktu Antar Kedatangan: {{ waktuAntarKedatangan }}
+            Waktu Antar Kedatangan: {{ waktuAntarKedatangan }} orang perjam
             <br>
-            Waktu Pelayanan: {{ waktuPelayanan }}
+            Waktu Pelayanan: {{ waktuPelayanan }} orang perjam
             <br>
             Utilitas Sistem: {{ utilitasSistem }}
             <br>
@@ -164,7 +164,7 @@
             Rata - Rata Pelanggan Dalam Antrian: {{ meanLq }}
             <br>
             Rata - Rata Pelanggan Dalam Sistem: {{ meanL }}
-            
+
         </div>
     </Parent>
 </template>
@@ -214,7 +214,7 @@ function hitungWaktu(index: number, item: number) {
     selesai_pelayanan.value = waktuSelesai.value[index][item];
 }
 
-const waktuAntarKedatangan = ref<number>();
+const waktuAntarKedatangan = ref<number>(0);
 const waktuPelayanan = ref<number>();
 const utilitasSistem = ref<number>();
 const probabilitas = ref<number>();
@@ -225,44 +225,50 @@ const meanW = ref<number>();
 
 
 function hitung() {
-    waktuAntarKedatangan.value = parseInt(selesai_pelayanan.value!.toString()) * parseInt(banyak.value!.toString());
     let totalPelanggan = countSPelanggan.value!.reduce((a: any, b: any) => parseInt(a) + parseInt(b), 0);
-    waktuAntarKedatangan.value = waktuAntarKedatangan.value / totalPelanggan;
-    waktuAntarKedatangan.value = Math.ceil(3600 / waktuAntarKedatangan.value);
-    let totalPelayanan = 0;
-    for (let i = 0; i < banyak.value!; i++) {
-       totalPelayanan += waktuKedatangan.value[i][countSPelanggan.value[i]];
-    }
-    waktuPelayanan.value = totalPelayanan * 60;
-    waktuPelayanan.value = Math.ceil(waktuPelayanan.value / totalPelanggan);
-    waktuPelayanan.value = Math.ceil(3600 / waktuPelayanan.value);
-    let totalPelangganMenaunggu = 0;
-    let totalPetugasDiam = 0;
-    for (let i = 0; i < banyak.value!; i++) {
-        for (let j = 0; j < countSPelanggan.value[i]; j++) {
-            totalPelangganMenaunggu += waktuMenunggu.value[i][j];
-            totalPetugasDiam += waktuDiam.value[i][j];
-        }
-    }
-    utilitasSistem.value = waktuAntarKedatangan.value / (banyak.value! * waktuPelayanan.value);
-    probabilitas.value = probabilitasPelangganMenunggu(waktuAntarKedatangan.value, waktuPelayanan.value, banyak.value!);
-    meanLq.value = lq(waktuAntarKedatangan.value, waktuPelayanan.value, banyak.value!);
-    meanL.value = l(waktuAntarKedatangan.value, waktuPelayanan.value, banyak.value!);
-    meanWq.value = wq(waktuAntarKedatangan.value, waktuPelayanan.value, banyak.value!);
-    meanW.value = W(waktuAntarKedatangan.value, waktuPelayanan.value, banyak.value!);
-    
+    antarKedatangan(selesai_pelayanan.value!, banyak.value!, totalPelanggan);
+    let totalPelayanan = lamaPelayanan();
+
+    waktuPelayanan.value = Math.floor((totalPelayanan * 60) / totalPelanggan);
+    waktuPelayanan.value = Math.floor(3600 / waktuPelayanan.value);
+    utilitasSistem.value = Number((waktuAntarKedatangan.value / (banyak.value! * waktuPelayanan.value)).toFixed(2));
+
+    probabilitas.value = probabilitasPelangganMenunggu(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!);
+
+    meanLq.value = Number(lq(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
+    meanL.value = Number(l(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
+    meanWq.value = Number(wq(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
+    meanW.value = Number(W(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
+
 
 
 }
 
+function antarKedatangan(selesai_pelayanan: number, banyak: number, totalPelanggan: number) {
+    let result = 0;
+    result = selesai_pelayanan * banyak;
+    result = result * 60;
+    result = result / totalPelanggan;
+    waktuAntarKedatangan.value = Math.floor(3600 / result);
+}
+
+function lamaPelayanan() {
+    let totalPelayanan = 0;
+    for (let i = 0; i < banyak.value!; i++) {
+        totalPelayanan += waktuLama.value[i].reduce((a: any, b: any) => parseInt(a) + parseInt(b), 0);
+    }
+    return totalPelayanan;
+}
+
+
 
 function probabilitasPelangganMenunggu(waktuAntarKedatangan: number, waktuPelayanan: number, bayakPetugas: number) {
     let result = 0;
-    for(let i = 0; i < bayakPetugas; i++) {
+    for (let i = 0; i < bayakPetugas; i++) {
         result += Math.pow(waktuAntarKedatangan / waktuPelayanan, i) / faktorial(i);
     }
     result += Math.pow(waktuAntarKedatangan / waktuPelayanan, bayakPetugas) / (faktorial(bayakPetugas) * (1 - (waktuAntarKedatangan / (bayakPetugas * waktuPelayanan))));
-    return result; 
+    return result;
 }
 
 function faktorial(n: number): number {

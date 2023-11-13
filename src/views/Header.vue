@@ -57,7 +57,7 @@
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="rounded-circle header-profile-user" src="/images/users/avatar-1.png"
                             alt="Header Avatar" />
-                        <span class="d-none d-xl-inline-block ms-1 text-white" key="t-henry">Sukron Katsir</span>
+                        <span class="d-none d-xl-inline-block ms-1 text-white" key="t-henry">User</span>
                     </button>
                 </div>
             </div>
