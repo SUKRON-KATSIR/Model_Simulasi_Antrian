@@ -19,9 +19,10 @@
                   <p>Aplikasi menghitung antrian</p>
 
                   <div class="text-muted">
-                    <!-- <p class="mb-1"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i> Model Simulasi 2023</p> -->
+                    <p class="mb-1"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i> Model Simulasi 2023</p>
                     <!-- <p class="mb-1"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i> </p> -->
                     <p class="mb-0"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i> Sukron Katsir (2020520012) </p>
+                    <p class="mb-0"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i> Khana Zulfana Imam (2021520001) </p>
                   </div>
                 </div>
               </div>
