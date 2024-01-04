@@ -169,14 +169,21 @@
     </Parent>
 </template>
 
+<!-- import -->
 <script setup lang="ts">
 import { ref } from 'vue';
 import Parent from './Parent.vue';
+
+//Variabel Reaktif Vue 3
 const banyaknya = ref();
 const banyak = ref<number>();
+
+//Fungsi untuk mengatur nilai 'banyak antrian'
 function banyakAntrian() {
     banyak.value = parseInt(banyaknya.value);
 }
+
+//array yang di gunakan untuk menyimpan data setiap sistem antrian
 const pelaggans = ref<any[]>([]);
 const countSPelanggan = ref<[]>([]);
 const waktuKedatangan = ref<any[][]>([]);
@@ -186,7 +193,8 @@ const waktuLama = ref<any[][]>([]);
 const waktuMenunggu = ref<any[][]>([]);
 const waktuDiam = ref<any[][]>([]);
 
-function tambahPelanggan(index: number) {
+// Fungsi untuk menambah pelanggan ke sistem antrian
+function tambahPelanggan(index: number) { //Mengisialisasi array berdasarkan jumlah pelanggan
     pelaggans.value[index] = parseInt(countSPelanggan.value[index]);
     waktuKedatangan.value[index] = [];
     waktuMulai.value[index] = [];
@@ -204,8 +212,10 @@ function tambahPelanggan(index: number) {
     }
 }
 
+//Variabel untuk menyimpan waktu penyelesaian pelayanan
 const selesai_pelayanan = ref<number>();
 
+// Fungsi untuk menghitung berbagai metrik waktu untuk seorang pelanggan dalam sistem antrian
 function hitungWaktu(index: number, item: number) {
     waktuLama.value[index][item] = waktuSelesai.value[index][item] - waktuMulai.value[index][item];
     waktuMenunggu.value[index][item] = waktuMulai.value[index][item] - waktuKedatangan.value[index][item];
@@ -214,6 +224,7 @@ function hitungWaktu(index: number, item: number) {
     selesai_pelayanan.value = waktuSelesai.value[index][item];
 }
 
+// Variabel untuk menyimpan metrik kinerja untuk sistem secara keseluruhan
 const waktuAntarKedatangan = ref<number>(0);
 const waktuPelayanan = ref<number>();
 const utilitasSistem = ref<number>();
@@ -223,7 +234,7 @@ const meanL = ref<number>();
 const meanWq = ref<number>();
 const meanW = ref<number>();
 
-
+// Fungsi untuk melakukan perhitungan dan memperbarui metrik
 function hitung() {
     let totalPelanggan = countSPelanggan.value!.reduce((a: any, b: any) => parseInt(a) + parseInt(b), 0);
     antarKedatangan(selesai_pelayanan.value!, banyak.value!, totalPelanggan);
@@ -239,11 +250,9 @@ function hitung() {
     meanL.value = Number(l(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
     meanWq.value = Number(wq(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
     meanW.value = Number(W(waktuAntarKedatangan!.value, waktuPelayanan.value, banyak.value!).toFixed(2));
-
-
-
 }
 
+// Fungsi pembantu untuk menghitung waktu antar kedatangan
 function antarKedatangan(selesai_pelayanan: number, banyak: number, totalPelanggan: number) {
     let result = 0;
     result = selesai_pelayanan * banyak;
@@ -252,6 +261,7 @@ function antarKedatangan(selesai_pelayanan: number, banyak: number, totalPelangg
     waktuAntarKedatangan.value = Math.floor(3600 / result);
 }
 
+// Fungsi pembantu untuk menghitung total waktu layanan
 function lamaPelayanan() {
     let totalPelayanan = 0;
     for (let i = 0; i < banyak.value!; i++) {
@@ -260,8 +270,7 @@ function lamaPelayanan() {
     return totalPelayanan;
 }
 
-
-
+// Fungsi pembantu untuk menghitung probabilitas seorang pelanggan menunggu
 function probabilitasPelangganMenunggu(waktuAntarKedatangan: number, waktuPelayanan: number, bayakPetugas: number) {
     let result = 0;
     for (let i = 0; i < bayakPetugas; i++) {
@@ -279,25 +288,28 @@ function faktorial(n: number): number {
     }
 }
 
+// Fungsi pembantu untuk menghitung Lq (rata-rata jumlah pelanggan dalam antrian)
 function lq(waktuAntarKedatangan: number, waktuPelayanan: number, bayakPetugas: number) {
     let result = 0;
     result = Math.pow(waktuAntarKedatangan / waktuPelayanan, bayakPetugas) * (waktuAntarKedatangan / (faktorial(bayakPetugas) * Math.pow(bayakPetugas * waktuPelayanan - waktuAntarKedatangan, 2)));
     return result;
-
 }
 
+// Fungsi pembantu untuk menghitung L (rata-rata jumlah pelanggan dalam sistem)
 function l(waktuAntarKedatangan: number, waktuPelayanan: number, bayakPetugas: number) {
     let result = 0;
     result = lq(waktuAntarKedatangan, waktuPelayanan, bayakPetugas) + (waktuAntarKedatangan / waktuPelayanan);
     return result;
 }
 
+// Fungsi pembantu untuk menghitung Wq (rata-rata waktu seorang pelanggan menunggu)
 function wq(waktuAntarKedatangan: number, waktuPelayanan: number, bayakPetugas: number) {
     let result = 0;
     result = lq(waktuAntarKedatangan, waktuPelayanan, bayakPetugas) / (waktuAntarKedatangan / waktuPelayanan);
     return result;
 }
 
+// Fungsi pembantu untuk menghitung W (rata-rata waktu seorang pelanggan dalam sistem)
 function W(waktuAntarKedatangan: number, waktuPelayanan: number, bayakPetugas: number) {
     let result = 0;
     result = wq(waktuAntarKedatangan, waktuPelayanan, bayakPetugas) + (1 / waktuPelayanan);
