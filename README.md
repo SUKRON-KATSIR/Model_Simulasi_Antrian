@@ -17,4 +17,5 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
 
+<img width="951" alt="image" src="https://github.com/user-attachments/assets/7c3b3e15-fedf-4a33-b6a7-1e2a5cb45d32">
 
